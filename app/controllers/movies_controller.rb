@@ -14,14 +14,11 @@ class MoviesController < ApplicationController
     case params[:sort_by]
       when 'title'
         @movies = Movie.all.order(:title)
-      when 'rating'
-        @movies = Movie.all.order(:rating)
       when 'release_date'
         @movies = Movie.all.order(:release_date)
       else
         @movies = Movie.all
     end
-
   end
 
   def new
