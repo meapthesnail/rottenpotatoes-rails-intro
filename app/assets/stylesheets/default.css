@@ -44,6 +44,10 @@ table#movies th {
   font-weight: bold;
   background-color: wheat;
 }
+table#movies th a {
+  color: DarkSlateGrey;
+  text-decoration: none;
+}
 table#movies th, table#movies td {
   padding: 4px;
   text-align: left;
@@ -51,7 +55,7 @@ table#movies th, table#movies td {
 table#movies th.hilite {
   background-color: yellow;
 }
-tr.hover {
+tr:hover {
   background-color: lemonchiffon;
 }
 #notice #warning {
