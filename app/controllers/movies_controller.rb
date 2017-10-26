@@ -12,6 +12,9 @@ class MoviesController < ApplicationController
 
   def index
     
+    @all_ratings = Movie.ratings
+    
+    
     if params.has_key?(:ratings)
       @ratings_checked = params[:ratings].keys
       session[:ratings] = params[:ratings]
@@ -29,7 +32,7 @@ class MoviesController < ApplicationController
     end
 
     
-    @all_ratings = Movie.ratings
+    
 
     @movies = Movie.where(:rating => @ratings_checked)
     
