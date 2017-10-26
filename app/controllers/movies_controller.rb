@@ -13,15 +13,17 @@ class MoviesController < ApplicationController
   def index
     
     @all_ratings = Movie.ratings
-=begin
+
     if params[:ratings] != session[:ratings]
       redirect_to url_for(action: 'index', controller: 'movies', ratings: session[:ratings])
     end
-=end
+
+=begin
 
     if params[:sort_by] != session[:sort_by]
         redirect_to url_for(action: 'index', controller: 'movies', sort_by: session[:sort_by])
     end
+=end
 
 =begin
     if params[:sort_by] != session[:sort_by] || params[:ratings] != session[:ratings]
