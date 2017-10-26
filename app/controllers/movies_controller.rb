@@ -14,11 +14,11 @@ class MoviesController < ApplicationController
     
     @all_ratings = Movie.ratings
 
-=begin
+
     if params[:ratings] != session[:ratings]
       redirect_to url_for(action: 'index', controller: 'movies', ratings: session[:ratings])
     end
-=end
+
 
 =begin
 
