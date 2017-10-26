@@ -45,8 +45,9 @@ class MoviesController < ApplicationController
     elsif session.has_key?(:ratings)
       ratings_checked = session[:ratings].keys
     else
-      ratings_checked = ['G','PG','PG-13','R']
+      ratings_checked = ["G","PG","PG-13","R"]
     end
+    
     
     @movies = Movie.where(:rating => ratings_checked)
     
