@@ -40,17 +40,17 @@ class MoviesController < ApplicationController
 =end
 
     if params.has_key?(:ratings)
-      ratings_checked = params[:ratings].keys
+      @ratings_checked = params[:ratings].keys
       session[:ratings] = params[:ratings]
     elsif !session[:ratings].nil?
-      ratings_checked = session[:ratings].keys
+      @ratings_checked = session[:ratings].keys
     else
-      ratings_checked = @all_ratings
+      @ratings_checked = @all_ratings
     end
 
     
     
-    @movies = Movie.where(:rating => ratings_checked)
+    @movies = Movie.where(:rating => @ratings_checked)
     
     if params.has_key?(:sort_by)
       sort_by = params[:sort_by]
