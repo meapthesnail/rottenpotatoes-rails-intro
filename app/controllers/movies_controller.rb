@@ -11,12 +11,10 @@ class MoviesController < ApplicationController
   end
 
   def index
+    
     if params.has_key?(:ratings)
       @ratings_checked = params[:ratings].keys
-      if session[:ratings] != params[:ratings]
-        session[:ratings] = params[:ratings]
-        redirect_to url_for :ratings => session[:ratings], :sort_by => session[:sort_by]
-      end
+      session[:ratings] = params[:ratings]
     elsif !session[:ratings].nil?
       @ratings_checked = session[:ratings].keys
     else
@@ -25,10 +23,7 @@ class MoviesController < ApplicationController
     
     if params.has_key?(:sort_by)
       @sort_by = params[:sort_by]
-      if session[:sort_by] != params[:sort_by]
-        session[:sort_by] = params[:sort_by]
-        redirect_to url_for :ratings => session[:ratings], :sort_by => session[:sort_by]
-      end
+      session[:sort_by] = params[:sort_by]
     else
       @sort_by = session[:sort_by]
     end
