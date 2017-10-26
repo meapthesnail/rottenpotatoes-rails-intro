@@ -42,8 +42,10 @@ class MoviesController < ApplicationController
     if params.has_key?(:ratings)
       ratings_checked = params[:ratings].keys
       session[:ratings] = params[:ratings]
-    else
+    elsif session.has_key?(:ratings)
       ratings_checked = session[:ratings].keys
+    else
+      ratings_checked = ['G','PG','PG-13','R']
     end
     
     @movies = Movie.where(:rating => ratings_checked)
