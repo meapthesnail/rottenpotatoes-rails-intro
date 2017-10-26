@@ -54,10 +54,17 @@ table#movies th.hilite {
 tr:hover {
   background-color: lemonchiffon;
 }
-#notice #warning {
-  background: rosybrown;
+#notice, #warnign {
+  color: white;
+  text-align: center;
   margin: 1em 0;
   padding: 4px;
+}
+#warning {
+  background: rosybrown;
+}
+#notice {
+  background: lightgreen;
 }
 form label {
   display: block;

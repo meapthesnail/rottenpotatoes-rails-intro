@@ -11,18 +11,57 @@ class MoviesController < ApplicationController
   end
 
   def index
+    
     @all_ratings = Movie.ratings
-    @ratings_checked = params[:ratings].keys if params.has_key?(:ratings)
+=begin
+    if params[:ratings] != session[:ratings]
+      redirect_to url_for(action: 'index', controller: 'movies', ratings: session[:ratings])
+    end
+=end
+
+    if params[:sort_by] != session[:sort_by]
+        redirect_to url_for(action: 'index', controller: 'movies', sort_by: session[:sort_by])
+    end
+
+=begin
+    if params[:sort_by] != session[:sort_by] || params[:ratings] != session[:ratings]
+      if params[:sort_by] != session[:sort_by] && params[:ratings] != session[:ratings]
+        redirect_to url_for(action: 'index', controller: 'movies', sort_by: session[:sort_by], ratings: session[:ratings])
+      elsif params[:ratings] != session[:ratings]
+        redirect_to url_for(action: 'index', controller: 'movies', ratings: session[:ratings])
+      else
+        redirect_to url_for(action: 'index', controller: 'movies', sort_by: session[:sort_by])
+      end
+    end
+=end
     
-    @movies = Movie.where(:rating => @ratings_checked)
+    if params.has_key?(:ratings)
+      ratings_checked = params[:ratings].keys
+      session[:ratings] = params[:ratings]
+    else
+      ratings_checked = session[:ratings].keys
+    end
     
-    case params[:sort_by]
+    @movies = Movie.where(:rating => ratings_checked)
+    
+    if params.has_key?(:sort_by)
+      sort_by = params[:sort_by]
+      session[:sort_by] = params[:sort_by]
+    else
+      sort_by = session[:sort_by]
+    end
+    
+    
+    case sort_by
       when 'title'
-        @movies = Movie.all.order(:title)
+        @movies = @movies.order(:title)
       when 'release_date'
-        @movies = Movie.all.order(:release_date)
+        @movies = @movies.order(:release_date)
       else
     end
+    
+    
+    
   end
 
   def new
