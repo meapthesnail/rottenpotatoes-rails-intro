@@ -21,7 +21,9 @@ class MoviesController < ApplicationController
     elsif !session[:ratings].nil?
       @ratings_checked = session[:ratings].keys
     else
-      @ratings_checked = @all_ratings
+      session[:ratings] = {"G"=>"1", "PG"=>"1", "PG-13"=>"1", "R"=>"1"}
+      flash.keep
+      redirect_to url_for :ratings => session[:ratings]
     end
     
     if params.has_key?(:sort_by)
@@ -30,6 +32,7 @@ class MoviesController < ApplicationController
     else
       @sort_by = session[:sort_by]
     end
+
     
     if params[:redirect] || params.has_key?(:commit)
       flash.keep
